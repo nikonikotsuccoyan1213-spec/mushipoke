@@ -6,20 +6,20 @@
     <title>ムシポケ</title>
     <style>
       :root {
-        --leaf: #8ad51f;
+        --leaf: #9cff1a;
         --leaf-dark: #111111;
-        --sky: #4fc3da;
-        --sky-soft: #e9fbff;
-        --sun: #ffd91f;
-        --sun-soft: #fff3a6;
-        --coral: #ff6f3c;
-        --berry: #8b5b7e;
+        --sky: #14b8ff;
+        --sky-soft: #e6f8ff;
+        --sun: #ffd400;
+        --sun-soft: #fff0a3;
+        --coral: #ff4f19;
+        --berry: #6e44ff;
         --ink: #111111;
         --soft-ink: #4b4b4b;
         --paper: #ffffff;
-        --mist: #f5ffe9;
+        --mist: #f2ffe3;
         --line: #111111;
-        --shadow: 8px 9px 0 rgba(17, 17, 17, 0.16);
+        --shadow: 8px 9px 0 rgba(17, 17, 17, 0.22);
       }
 
       * {
@@ -45,7 +45,11 @@
           system-ui,
           sans-serif;
         font-weight: 800;
-        background: #fffdf7;
+        background:
+          linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+          linear-gradient(135deg, #fffdf7 0%, #f4ffe6 48%, #e8f8ff 100%);
+        background-size: 22px 22px, 22px 22px, auto;
         overflow-x: hidden;
       }
 
@@ -789,10 +793,20 @@
         gap: 8px;
       }
 
+      .place-manager {
+        display: grid;
+        gap: 10px;
+      }
+
       .label-add-row {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto auto;
         gap: 10px;
+      }
+
+      .place-area-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
       }
 
       .place-voice-status {
@@ -843,6 +857,16 @@
         border-width: 2px;
         font-size: 0.82rem;
         line-height: 1.2;
+      }
+
+      .place-card-main {
+        font-weight: 900;
+      }
+
+      .place-card-area {
+        color: var(--soft-ink);
+        font-size: 0.72rem;
+        line-height: 1.25;
       }
 
       .place-card .place-button .mini-icon {
@@ -1735,6 +1759,165 @@
         justify-content: center;
       }
 
+      .mission-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+        gap: 14px;
+        align-items: stretch;
+        min-width: 0;
+      }
+
+      .mission-command {
+        position: relative;
+        display: grid;
+        gap: 12px;
+        overflow: hidden;
+        padding: clamp(16px, 4vw, 24px);
+        color: #ffffff;
+        background:
+          radial-gradient(circle at 88% 12%, rgba(156, 255, 26, 0.42), transparent 22%),
+          linear-gradient(135deg, #111111 0%, #1c2a18 54%, #0e5b4f 100%);
+        border: 4px solid #111111;
+        border-radius: 8px;
+        box-shadow: 8px 9px 0 rgba(17, 17, 17, 0.24);
+      }
+
+      .mission-command::after {
+        position: absolute;
+        right: -42px;
+        bottom: -58px;
+        width: 170px;
+        height: 170px;
+        content: "";
+        background:
+          linear-gradient(#9cff1a 0 0) center / 100% 14px no-repeat,
+          linear-gradient(90deg, #9cff1a 0 0) center / 14px 100% no-repeat;
+        opacity: 0.2;
+        transform: rotate(22deg);
+      }
+
+      .mission-command small {
+        width: fit-content;
+        padding: 5px 9px;
+        color: #111111;
+        background: var(--sun);
+        border: 2px solid #ffffff;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .mission-command h2 {
+        max-width: 11ch;
+        font-size: clamp(2rem, 7vw, 3.4rem);
+        line-height: 0.95;
+      }
+
+      .mission-command p {
+        max-width: 26rem;
+        color: #eaffd8;
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+
+      .mission-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .mission-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .mission-stat {
+        display: grid;
+        gap: 3px;
+        min-height: 94px;
+        padding: 12px;
+        color: #111111;
+        background: #ffffff;
+        border: 3px solid #111111;
+        border-radius: 8px;
+        box-shadow: 5px 6px 0 rgba(17, 17, 17, 0.16);
+      }
+
+      .mission-stat strong {
+        font-size: clamp(1.8rem, 7vw, 2.7rem);
+        line-height: 1;
+      }
+
+      .mission-stat span {
+        color: var(--soft-ink);
+        font-size: 0.82rem;
+        line-height: 1.25;
+      }
+
+      .bugs-grid .bug-card {
+        border-width: 3px;
+        box-shadow: 7px 8px 0 rgba(17, 17, 17, 0.16);
+      }
+
+      .bug-card .bug-name {
+        color: #111111;
+        font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+        text-shadow: 1px 1px 0 var(--sun);
+      }
+
+      .create-grid .screen {
+        counter-reset: createStep;
+      }
+
+      .create-grid .screen > .section-band {
+        position: relative;
+        padding-top: clamp(38px, 7vw, 50px);
+      }
+
+      .create-grid .screen > .section-band::before {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        counter-increment: createStep;
+        content: counter(createStep);
+        color: #111111;
+        background: var(--sun);
+        border: 3px solid #111111;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 900;
+        box-shadow: 3px 4px 0 rgba(17, 17, 17, 0.18);
+      }
+
+      .cover-page {
+        padding: clamp(14px, 4vw, 34px);
+        background:
+          radial-gradient(circle at 50% 34%, rgba(255, 212, 0, 0.26), transparent 25%),
+          linear-gradient(135deg, #ffffff 0%, #f5ffe4 60%, #dcf5ff 100%);
+        border: 4px solid #111111;
+        border-radius: 10px;
+        box-shadow: 12px 14px 0 rgba(17, 17, 17, 0.18);
+      }
+
+      .cover-button {
+        min-width: 150px;
+        text-transform: none;
+      }
+
+      .cover-button::before {
+        position: absolute;
+        inset: 6px;
+        content: "";
+        border: 2px solid rgba(255, 255, 255, 0.65);
+        border-radius: 4px;
+        pointer-events: none;
+      }
+
       .collection-badge {
         display: grid;
         gap: 8px;
@@ -2064,9 +2247,12 @@
 
       .map-panel {
         position: relative;
+        display: grid;
+        place-items: center;
         min-height: clamp(330px, 52vh, 560px);
+        padding: 18px;
         overflow: hidden;
-        background: linear-gradient(180deg, #e9fbff, #ffffff 48%, #fffdf7);
+        background: linear-gradient(180deg, #f2fff1, #ffffff 58%, #fffdf7);
         border: 3px solid var(--ink);
         border-radius: 8px;
         box-shadow: 10px 10px 0 rgba(17, 17, 17, 0.14);
@@ -2081,35 +2267,44 @@
       }
 
       .japan-map {
-        position: absolute;
-        inset: 18px;
-        width: calc(100% - 36px);
-        height: calc(100% - 36px);
+        position: relative;
+        width: min(100%, 560px);
+        height: auto;
+        max-height: 70vh;
       }
 
       .region-shape {
-        fill: #ffffff;
-        stroke: #111111;
+        fill: #dff1d8;
+        stroke: #ffffff;
         stroke-width: 4;
         stroke-linejoin: round;
-        filter: drop-shadow(4px 5px 0 rgba(17, 17, 17, 0.14));
+        cursor: pointer;
+        filter: drop-shadow(3px 4px 0 rgba(17, 17, 17, 0.12));
+        transition: fill 0.18s ease, transform 0.18s ease;
       }
 
       .region-shape.has-bugs {
-        fill: #fff3a6;
+        fill: #fff4a8;
       }
 
       .region-shape.is-active {
-        fill: var(--leaf);
+        fill: #9bd56f;
+      }
+
+      .region-tile:hover .region-shape,
+      .region-tile:focus-visible .region-shape {
+        fill: #a9d08e;
       }
 
       .region-label {
-        fill: #111111;
-        font-size: 17px;
+        display: block;
+        fill: #385723;
+        font-size: 13px;
         font-weight: 900;
         paint-order: stroke;
         stroke: #ffffff;
-        stroke-width: 5px;
+        stroke-width: 4px;
+        pointer-events: none;
       }
 
       .region-dot {
@@ -2118,33 +2313,40 @@
         stroke-width: 3;
       }
 
+      .region-count {
+        fill: #ffffff;
+        font-size: 12px;
+        font-weight: 900;
+        text-anchor: middle;
+        dominant-baseline: central;
+        pointer-events: none;
+      }
+
       .pin-button {
         position: absolute;
         z-index: 2;
         display: grid;
-        grid-template-columns: 36px auto;
-        gap: 8px;
-        align-items: center;
-        min-width: 150px;
-        padding: 8px 10px;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
         color: var(--ink);
-        background: #fffdf6;
+        background: var(--sun);
         border: 3px solid var(--ink);
-        border-radius: 8px;
+        border-radius: 50%;
         box-shadow: 5px 6px 0 rgba(17, 17, 17, 0.15);
         font-weight: 900;
-        text-align: left;
-        transform: translate(-22px, -44px);
+        transform: translate(-50%, -50%);
       }
 
       .pin-button.is-active {
-        background: #fff2a8;
+        background: var(--sky);
       }
 
       .pin-count {
         display: grid;
-        width: 36px;
-        height: 36px;
+        width: 30px;
+        height: 30px;
         place-items: center;
         color: #ffffff;
         background: var(--coral);
@@ -2152,20 +2354,77 @@
         border-radius: 50%;
       }
 
-      .pin-label {
-        display: grid;
-        gap: 2px;
-        white-space: nowrap;
-      }
-
-      .pin-label small {
-        color: var(--soft-ink);
-        font-size: 0.78rem;
-      }
-
       .map-side {
         display: grid;
         gap: 10px;
+      }
+
+      .map-location-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+        gap: 8px;
+      }
+
+      .map-location-card {
+        display: grid;
+        gap: 4px;
+        min-height: 82px;
+        padding: 9px;
+        color: var(--ink);
+        background: #ffffff;
+        border: 2px solid #111111;
+        border-radius: 8px;
+        box-shadow: 4px 5px 0 rgba(17, 17, 17, 0.12);
+        text-align: left;
+        font-weight: 900;
+      }
+
+      .map-location-card.is-active {
+        background: var(--sun);
+        border-color: var(--leaf-dark);
+      }
+
+      .map-location-card small {
+        color: var(--soft-ink);
+        font-size: 0.74rem;
+        line-height: 1.35;
+      }
+
+      .region-legend-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .region-legend-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6px;
+        align-items: center;
+        min-height: 46px;
+        padding: 8px 9px;
+        color: var(--ink);
+        background: #ffffff;
+        border: 2px solid #111111;
+        border-radius: 8px;
+        font-weight: 900;
+        text-align: left;
+      }
+
+      .region-legend-card.is-active {
+        background: var(--sky);
+      }
+
+      .region-legend-card .region-badge {
+        display: grid;
+        min-width: 28px;
+        height: 28px;
+        place-items: center;
+        color: #ffffff;
+        background: var(--coral);
+        border: 2px solid #111111;
+        border-radius: 50%;
+        font-size: 0.8rem;
       }
 
       .modal-backdrop {
@@ -2800,6 +3059,7 @@
         .detail-grid,
         .care-grid,
         .date-grid,
+        .mission-panel,
         .map-grid {
           grid-template-columns: 1fr;
         }
@@ -2982,6 +3242,34 @@
 
         .month-planner-title span {
           font-size: 0.72rem;
+        }
+
+        .mission-panel {
+          gap: 10px;
+        }
+
+        .mission-command {
+          padding: 16px 12px;
+        }
+
+        .mission-command h2 {
+          max-width: none;
+          font-size: 1.9rem;
+        }
+
+        .mission-actions,
+        .mission-stat-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+        }
+
+        .mission-stat {
+          min-height: 82px;
+          padding: 10px;
+        }
+
+        .mission-stat strong {
+          font-size: 1.8rem;
         }
 
         .place-grid {
@@ -4188,6 +4476,15 @@
         okinawa: { label: "おきなわ", x: 11, y: 94, d: "M21 515 62 519 67 543 25 546Z", textX: 46, textY: 538 },
       };
 
+      function loadStoredArray(key) {
+        try {
+          const value = JSON.parse(localStorage.getItem(key) || "[]");
+          return Array.isArray(value) ? value : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
       const state = {
         screen: "home",
         sort: "kana",
@@ -4197,6 +4494,7 @@
         outingMonth: currentMonth(),
         createPlace: Object.keys(locations)[0] || "",
         placeDraft: "",
+        placeAreaDraft: "",
         locationSeq: Object.keys(locations).length,
         createCategory: Object.keys(taxonCategories)[0] || "",
         categoryDraft: "",
@@ -4232,7 +4530,7 @@
         collectionCardOpen: false,
         selectedCollectionCardKey: "",
         menuOpen: false,
-        rareCards: JSON.parse(localStorage.getItem("mushipokeRareCards") || "[]"),
+        rareCards: loadStoredArray("mushipokeRareCards"),
         photoPermissionOpen: false,
         pendingPhotoKind: "",
         printIds: [],
@@ -4243,7 +4541,7 @@
         selectedBugId: "",
         careDraft: "えさを たべたよ。げんき。",
         toast: "",
-        bugs: [],
+        bugs: loadStoredArray("mushipokeBugs"),
       };
 
       let recordTimer = null;
@@ -4409,6 +4707,37 @@
         `;
       }
 
+      function renderMissionPanel() {
+        const badges = badgeSummary();
+        const rareCount = outingMissions.filter((mission) => mission.rare && hasRareCard(mission)).length;
+        const nextBadge = badges.count >= 100 ? "さいこう" : `${badges.nextStar}ひき`;
+        return `
+          <div class="mission-panel">
+            <div class="mission-command">
+              <small>ムシボックス</small>
+              <h2>きみの きろく</h2>
+              <p>つかまえた むしは ここに あつまるよ。しゃしんが なくても、なまえと ひづけで すぐ のこせるよ。</p>
+              <div class="mission-actions">
+                <button class="primary-button sun" type="button" onclick="setScreen('create')">
+                  <span class="mini-icon" aria-hidden="true">${icon("plus")}</span>
+                  <span>ついか</span>
+                </button>
+                <button class="ghost-button" type="button" onclick="setScreen('collection')">
+                  <span class="mini-icon" aria-hidden="true">${icon("star")}</span>
+                  <span>カード</span>
+                </button>
+              </div>
+            </div>
+            <div class="mission-stat-grid">
+              <div class="mission-stat"><strong>${state.bugs.length}</strong><span>きろくした むし</span></div>
+              <div class="mission-stat"><strong>${rareCount}</strong><span>レアカード</span></div>
+              <div class="mission-stat"><strong>${badges.starCount}</strong><span>ほしばっじ</span></div>
+              <div class="mission-stat"><strong>${nextBadge}</strong><span>つぎの ばっじ</span></div>
+            </div>
+          </div>
+        `;
+      }
+
       function renderOutingSection() {
         const outings = currentOutings();
         if (!outings.length) return "";
@@ -4418,8 +4747,8 @@
             <div class="section-title">
               <span class="tool-icon" aria-hidden="true">${icon("map")}</span>
               <div>
-                <h2>今月、この虫に会いに行こう！</h2>
-                <p>月をえらんで おでかけを けいかくしよう</p>
+                <h2>こんげつの むしを さがそう</h2>
+                <p>つきを えらんで おでかけを けいかくしよう</p>
               </div>
             </div>
             <div class="month-planner">
@@ -4427,7 +4756,7 @@
                 ${icon("back")}
               </button>
               <div class="month-planner-title">
-                <strong>${state.outingMonth}月の おすすめ</strong>
+                <strong>${state.outingMonth}がつの おすすめ</strong>
                 <span>ほかの月も タップして みられるよ</span>
               </div>
               <button class="month-nav-button" type="button" onclick="moveOutingMonth(1)" aria-label="つぎの月">
@@ -4439,7 +4768,7 @@
                 .map(
                   (month) => `
                     <button class="month-chip ${state.outingMonth === month ? "is-active" : ""}" type="button" onclick="setOutingMonth(${month})">
-                      ${month}月
+                      ${month}がつ
                     </button>
                   `,
                 )
@@ -4652,6 +4981,60 @@
       function guessRegion(label) {
         const text = String(label || "");
         const rules = [
+          ["北海道", "hokkaido"],
+          ["札幌", "hokkaido"],
+          ["青森", "tohoku"],
+          ["岩手", "tohoku"],
+          ["宮城", "tohoku"],
+          ["秋田", "tohoku"],
+          ["山形", "tohoku"],
+          ["福島", "tohoku"],
+          ["東京", "kanto"],
+          ["神奈川", "kanto"],
+          ["横浜", "kanto"],
+          ["戸塚", "kanto"],
+          ["川崎", "kanto"],
+          ["相模原", "kanto"],
+          ["千葉", "kanto"],
+          ["埼玉", "kanto"],
+          ["茨城", "kanto"],
+          ["栃木", "kanto"],
+          ["群馬", "kanto"],
+          ["新潟", "chubu"],
+          ["長野", "chubu"],
+          ["山梨", "chubu"],
+          ["静岡", "chubu"],
+          ["愛知", "chubu"],
+          ["名古屋", "chubu"],
+          ["岐阜", "chubu"],
+          ["富山", "chubu"],
+          ["石川", "chubu"],
+          ["福井", "chubu"],
+          ["大阪", "kansai"],
+          ["京都", "kansai"],
+          ["兵庫", "kansai"],
+          ["神戸", "kansai"],
+          ["奈良", "kansai"],
+          ["滋賀", "kansai"],
+          ["和歌山", "kansai"],
+          ["三重", "kansai"],
+          ["広島", "chugoku"],
+          ["岡山", "chugoku"],
+          ["山口", "chugoku"],
+          ["鳥取", "chugoku"],
+          ["島根", "chugoku"],
+          ["香川", "shikoku"],
+          ["愛媛", "shikoku"],
+          ["徳島", "shikoku"],
+          ["高知", "shikoku"],
+          ["福岡", "kyushu"],
+          ["佐賀", "kyushu"],
+          ["長崎", "kyushu"],
+          ["熊本", "kyushu"],
+          ["大分", "kyushu"],
+          ["宮崎", "kyushu"],
+          ["鹿児島", "kyushu"],
+          ["沖縄", "okinawa"],
           ["ほっかい", "hokkaido"],
           ["さっぽろ", "hokkaido"],
           ["あおもり", "tohoku"],
@@ -4704,13 +5087,15 @@
         return rules.find(([word]) => text.includes(word))?.[1] || "";
       }
 
+      function locationSearchText(location) {
+        return `${location?.area || ""} ${location?.label || ""}`;
+      }
+
       function ensureLocationRegion(key) {
         const location = locations[key];
         if (!location) return "kanto";
-        if (location.region && japanRegions[location.region]) return location.region;
-        const regionKeys = Object.keys(japanRegions);
-        const fallback = regionKeys[Math.max(0, Object.keys(locations).indexOf(key)) % regionKeys.length];
-        location.region = guessRegion(location.label) || fallback;
+        const guessed = guessRegion(locationSearchText(location));
+        location.region = guessed || "kanto";
         const region = japanRegions[location.region] || japanRegions.kanto;
         location.x = region.x;
         location.y = region.y;
@@ -4729,6 +5114,14 @@
 
       function saveCategories() {
         localStorage.setItem("mushipokeCategories", JSON.stringify(categories));
+      }
+
+      function saveBugs() {
+        try {
+          localStorage.setItem("mushipokeBugs", JSON.stringify(state.bugs));
+        } catch (error) {
+          showToast("しゃしんが おおきいかも");
+        }
       }
 
       function icon(name) {
@@ -5315,12 +5708,35 @@
           : `<img class="photo-tip-placeholder" src="assets/photo-tips-placeholder.webp" alt="撮影のポイント" />`;
       }
 
+      function compressPhotoData(file, done) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const source = String(reader.result || "");
+          const image = new Image();
+          image.onload = () => {
+            const maxSide = 1200;
+            const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+            const width = Math.max(1, Math.round(image.width * scale));
+            const height = Math.max(1, Math.round(image.height * scale));
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            const context = canvas.getContext("2d");
+            context.drawImage(image, 0, 0, width, height);
+            done(canvas.toDataURL("image/jpeg", 0.82));
+          };
+          image.onerror = () => done(source);
+          image.src = source;
+        };
+        reader.onerror = () => done("");
+        reader.readAsDataURL(file);
+      }
+
       function handlePhotoFile(kind, input) {
         const file = input.files?.[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          state.createPhotoData = String(reader.result || "");
+        compressPhotoData(file, (photoData) => {
+          state.createPhotoData = photoData;
           state.createPhoto = "beetle";
           state.hasPhoto = true;
           const date = new Date(file.lastModified || Date.now());
@@ -5331,8 +5747,7 @@
           showToast("しゃしんが はいったよ");
           input.value = "";
           render();
-        };
-        reader.readAsDataURL(file);
+        });
       }
 
       function chooseCreatePlace(place) {
@@ -5342,6 +5757,10 @@
 
       function updatePlaceDraft(value) {
         state.placeDraft = cleanPlaceText(value);
+      }
+
+      function updatePlaceAreaDraft(value) {
+        state.placeAreaDraft = cleanAreaText(value);
       }
 
       function cleanCategoryText(text) {
@@ -5438,6 +5857,7 @@
         });
         delete categories[key];
         saveCategories();
+        saveBugs();
         if (state.createCategory === key) state.createCategory = Object.keys(categories)[0] || "";
         showToast("カテゴリを けしたよ");
         render();
@@ -5449,6 +5869,76 @@
 
       function placeTextToHiragana(text) {
         const words = [
+          ["横浜市戸塚区", "かながわけん よこはまし とつかく"],
+          ["横浜市", "かながわけん よこはまし"],
+          ["戸塚区", "とつかく"],
+          ["戸塚", "とつか"],
+          ["横浜", "よこはま"],
+          ["川崎市", "かながわけん かわさきし"],
+          ["川崎", "かわさき"],
+          ["相模原市", "かながわけん さがみはらし"],
+          ["相模原", "さがみはら"],
+          ["鎌倉市", "かながわけん かまくらし"],
+          ["鎌倉", "かまくら"],
+          ["藤沢市", "かながわけん ふじさわし"],
+          ["藤沢", "ふじさわ"],
+          ["札幌市", "ほっかいどう さっぽろし"],
+          ["仙台市", "みやぎけん せんだいし"],
+          ["さいたま市", "さいたまけん さいたまし"],
+          ["千葉市", "ちばけん ちばし"],
+          ["名古屋市", "あいちけん なごやし"],
+          ["京都市", "きょうとふ きょうとし"],
+          ["大阪市", "おおさかふ おおさかし"],
+          ["神戸市", "ひょうごけん こうべし"],
+          ["広島市", "ひろしまけん ひろしまし"],
+          ["福岡市", "ふくおかけん ふくおかし"],
+          ["北海道", "ほっかいどう"],
+          ["青森県", "あおもりけん"],
+          ["岩手県", "いわてけん"],
+          ["宮城県", "みやぎけん"],
+          ["秋田県", "あきたけん"],
+          ["山形県", "やまがたけん"],
+          ["福島県", "ふくしまけん"],
+          ["茨城県", "いばらきけん"],
+          ["栃木県", "とちぎけん"],
+          ["群馬県", "ぐんまけん"],
+          ["埼玉県", "さいたまけん"],
+          ["千葉県", "ちばけん"],
+          ["東京都", "とうきょうと"],
+          ["神奈川県", "かながわけん"],
+          ["新潟県", "にいがたけん"],
+          ["富山県", "とやまけん"],
+          ["石川県", "いしかわけん"],
+          ["福井県", "ふくいけん"],
+          ["山梨県", "やまなしけん"],
+          ["長野県", "ながのけん"],
+          ["岐阜県", "ぎふけん"],
+          ["静岡県", "しずおかけん"],
+          ["愛知県", "あいちけん"],
+          ["三重県", "みえけん"],
+          ["滋賀県", "しがけん"],
+          ["京都府", "きょうとふ"],
+          ["大阪府", "おおさかふ"],
+          ["兵庫県", "ひょうごけん"],
+          ["奈良県", "ならけん"],
+          ["和歌山県", "わかやまけん"],
+          ["鳥取県", "とっとりけん"],
+          ["島根県", "しまねけん"],
+          ["岡山県", "おかやまけん"],
+          ["広島県", "ひろしまけん"],
+          ["山口県", "やまぐちけん"],
+          ["徳島県", "とくしまけん"],
+          ["香川県", "かがわけん"],
+          ["愛媛県", "えひめけん"],
+          ["高知県", "こうちけん"],
+          ["福岡県", "ふくおかけん"],
+          ["佐賀県", "さがけん"],
+          ["長崎県", "ながさきけん"],
+          ["熊本県", "くまもとけん"],
+          ["大分県", "おおいたけん"],
+          ["宮崎県", "みやざきけん"],
+          ["鹿児島県", "かごしまけん"],
+          ["沖縄県", "おきなわけん"],
           ["天王山", "てんのうざん"],
           ["天王やま", "てんのうざん"],
           ["天王ざん", "てんのうざん"],
@@ -5478,19 +5968,34 @@
           ["田んぼ", "たんぼ"],
           ["畑", "はたけ"],
           ["近く", "ちかく"],
+          ["市", "し"],
+          ["区", "く"],
+          ["町", "まち"],
+          ["村", "むら"],
         ];
         return words.reduce((value, [kanji, hira]) => value.replaceAll(kanji, hira), text);
       }
 
-      function cleanPlaceText(text) {
-        const hiraganaText = placeTextToHiragana(kanaToHiragana(String(text || "")));
+      function cleanLocationText(text, maxLength, dropUnknownKanji = false) {
+        let hiraganaText = placeTextToHiragana(kanaToHiragana(String(text || "")));
+        if (dropUnknownKanji && hasKanji(hiraganaText)) {
+          hiraganaText = hiraganaText.replace(/[\u3400-\u9fff]+/g, " ");
+        }
         if (hasKanji(hiraganaText)) return "";
         return hiraganaText
           .replace(/[。．、,，!！?？]/g, " ")
-          .replace(/[^ぁ-ゖ\s]/g, "")
+          .replace(/[^ぁ-ゖー\s]/g, "")
           .replace(/\s+/g, " ")
           .trim()
-          .slice(0, 18);
+          .slice(0, maxLength);
+      }
+
+      function cleanPlaceText(text) {
+        return cleanLocationText(text, 18);
+      }
+
+      function cleanAreaText(text) {
+        return cleanLocationText(text, 28, true);
       }
 
       function hasKanji(text) {
@@ -5537,6 +6042,7 @@
 
       function addLocationLabel() {
         const label = cleanPlaceText(state.placeDraft);
+        const area = cleanAreaText(state.placeAreaDraft);
         if (!label) {
           state.placeVoiceStatus = "ばしょの なまえを いれてね";
           showToast("ばしょの なまえを いれてね");
@@ -5549,23 +6055,24 @@
           render();
           return;
         }
-        const existing = Object.entries(locations).find(([, location]) => location.label === label);
+        const existing = Object.entries(locations).find(([, location]) => location.label === label && (location.area || "") === area);
         if (existing) {
           state.createPlace = existing[0];
           state.placeDraft = "";
+          state.placeAreaDraft = "";
           showToast("この らべるを えらんだよ");
           render();
           return;
         }
         state.locationSeq += 1;
         const key = `label-${Date.now()}-${state.locationSeq}`;
-        const regionKeys = Object.keys(japanRegions);
-        const regionKey = guessRegion(label) || regionKeys[(state.locationSeq - 1) % regionKeys.length];
+        const regionKey = guessRegion(`${area} ${label}`) || "kanto";
         const region = japanRegions[regionKey] || japanRegions.kanto;
-        locations[key] = { label, kind: region.label, icon: "pin", x: region.x, y: region.y, region: regionKey };
+        locations[key] = { label, area, kind: area || region.label, icon: "pin", x: region.x, y: region.y, region: regionKey };
         saveLocations();
         state.createPlace = key;
         state.placeDraft = "";
+        state.placeAreaDraft = "";
         showToast("ばしょを ついかしたよ");
         render();
       }
@@ -5576,11 +6083,13 @@
         state.bugs.forEach((bug) => {
           if (bug.place === key) {
             bug.placeLabel = location.label;
+            bug.placeArea = location.area || "";
             bug.place = "";
           }
         });
         delete locations[key];
         saveLocations();
+        saveBugs();
         if (state.createPlace === key) state.createPlace = Object.keys(locations)[0] || "";
         if (state.filter === key) state.filter = "all";
         state.placeVoiceStatus = "らべるを けしたよ";
@@ -5823,6 +6332,7 @@
           dateText: formatDateText(dateValue),
           place: state.createPlace,
           placeLabel: getLocation(state.createPlace)?.label || "ばしょなし",
+          placeArea: getLocation(state.createPlace)?.area || "",
           category,
           categoryLabel: getCategoryLabel({ category }),
           familyLabel,
@@ -5832,6 +6342,7 @@
           size: formatSize(),
           careRecords: [],
         });
+        saveBugs();
 
         state.voiceText = "";
         state.hasPhoto = false;
@@ -5885,6 +6396,15 @@
         state.zukanView = "place";
         state.zukanGroup = locationKey;
         render();
+      }
+
+      function focusRegion(regionKey) {
+        const firstLocation = Object.keys(locations).find((key) => ensureLocationRegion(key) === regionKey);
+        if (firstLocation) {
+          focusLocation(firstLocation);
+          return;
+        }
+        showToast("この ちほうは まだ ないよ");
       }
 
       function selectedBookBugs() {
@@ -6003,6 +6523,7 @@
         }
         bug.careRecords = bug.careRecords || [];
         bug.careRecords.unshift({ dateText: formatDateText(todayValue()), text });
+        saveBugs();
         state.careDraft = "";
         showToast("しいくきろくを つけたよ");
         render();
@@ -6093,16 +6614,21 @@
 
       function renderPlaceManager() {
         return `
-          <div class="label-add-row">
-            <input class="label-input" type="text" value="${escapeHtml(state.placeDraft)}" placeholder="れい：みつけた ばしょ" oninput="updatePlaceDraft(this.value)" />
-            <button class="primary-button label-add-button label-voice-button ${state.isPlaceRecording ? "is-recording" : ""}" type="button" onclick="startPlaceRecording()" aria-label="こえで ばしょ">
-              <span class="mini-icon" aria-hidden="true">${icon("mic")}</span>
-              <span class="choice-label">${state.isPlaceRecording ? "きく" : "こえ"}</span>
-            </button>
-            <button class="primary-button label-add-button" type="button" onclick="addLocationLabel()" aria-label="らべるを ついか">
-              <span class="mini-icon" aria-hidden="true">${icon("plus")}</span>
-              <span class="choice-label">ついか</span>
-            </button>
+          <div class="place-manager">
+            <div class="label-add-row">
+              <input class="label-input" type="text" value="${escapeHtml(state.placeDraft)}" placeholder="ばしょの なまえ" oninput="updatePlaceDraft(this.value)" />
+              <button class="primary-button label-add-button label-voice-button ${state.isPlaceRecording ? "is-recording" : ""}" type="button" onclick="startPlaceRecording()" aria-label="こえで ばしょ">
+                <span class="mini-icon" aria-hidden="true">${icon("mic")}</span>
+                <span class="choice-label">${state.isPlaceRecording ? "きく" : "こえ"}</span>
+              </button>
+              <button class="primary-button label-add-button" type="button" onclick="addLocationLabel()" aria-label="らべるを ついか">
+                <span class="mini-icon" aria-hidden="true">${icon("plus")}</span>
+                <span class="choice-label">ついか</span>
+              </button>
+            </div>
+            <div class="place-area-row">
+              <input class="label-input" type="text" value="${escapeHtml(state.placeAreaDraft)}" placeholder="だいたいの しょざいち" oninput="updatePlaceAreaDraft(this.value)" />
+            </div>
           </div>
           <div class="place-voice-status">${state.isPlaceRecording ? "ばしょを きいているよ" : state.placeVoiceStatus || (state.createPlace ? "えらんだ ばしょに はいるよ" : "")}</div>
           <div class="place-grid">
@@ -6113,7 +6639,8 @@
                       <div class="place-card">
                         <button class="place-button ${state.createPlace === key ? "is-active" : ""}" type="button" onclick="chooseCreatePlace('${key}')">
                           <span class="mini-icon" aria-hidden="true">${icon(place.icon)}</span>
-                          <span>${escapeHtml(place.label)}</span>
+                          <span class="place-card-main">${escapeHtml(place.label)}</span>
+                          <span class="place-card-area">${escapeHtml(place.area || place.kind || "しょざいちなし")}</span>
                         </button>
                         <button class="place-delete-button" type="button" onclick="deleteLocationLabel('${key}')" aria-label="らべるを けす">
                           <span class="mini-icon" aria-hidden="true">${icon("x")}</span>
@@ -6331,13 +6858,7 @@
         return `
           <section class="screen">
             <section class="section-band">
-              <div class="section-title">
-                <span class="tool-icon" aria-hidden="true">${icon("book")}</span>
-                <div>
-                  <h2>つかまえた むし</h2>
-                  <p>ここが じぶんの ずかんだよ</p>
-                </div>
-              </div>
+              ${renderMissionPanel()}
               <div class="zukan-openers" aria-label="ずかんの ひらきかた">
                 <button class="chip ${state.zukanView === "type" ? "is-active" : ""}" type="button" onclick="setZukanView('type')"><span>しゅるい</span></button>
                 <button class="chip ${state.zukanView === "season" ? "is-active" : ""}" type="button" onclick="setZukanView('season')"><span>きせつ</span></button>
@@ -6439,6 +6960,17 @@
           const regionKey = ensureLocationRegion(key);
           regionCounts[regionKey] = (regionCounts[regionKey] || 0) + locationBugs(key).length;
         });
+        const mapTiles = [
+          { key: "hokkaido", label: "ほっかいどう", x: 260, y: 20, width: 120, height: 70 },
+          { key: "tohoku", label: "とうほく", x: 280, y: 100, width: 80, height: 90 },
+          { key: "kanto", label: "かんとう", x: 280, y: 200, width: 80, height: 70 },
+          { key: "chubu", label: "ちゅうぶ", x: 190, y: 180, width: 80, height: 90 },
+          { key: "kansai", label: "かんさい", x: 130, y: 210, width: 50, height: 60 },
+          { key: "chugoku", label: "ちゅうごく", x: 40, y: 210, width: 80, height: 40 },
+          { key: "shikoku", label: "しこく", x: 40, y: 260, width: 80, height: 40 },
+          { key: "kyushu", label: "きゅうしゅう", x: 20, y: 310, width: 70, height: 80 },
+          { key: "okinawa", label: "おきなわ", x: 6, y: 392, width: 74, height: 28 },
+        ];
         return `
           <section class="screen">
             <section class="section-band">
@@ -6452,43 +6984,54 @@
             </section>
             <section class="map-grid">
               <div class="map-panel" aria-label="みつけた ちず">
-                <svg class="japan-map" viewBox="0 0 360 560" aria-hidden="true">
-                  ${Object.entries(japanRegions)
-                    .map(([key, region]) => `
-                      <path class="region-shape ${regionCounts[key] ? "has-bugs" : ""} ${activeRegion === key ? "is-active" : ""}" d="${region.d}"></path>
-                      <text class="region-label" x="${region.textX}" y="${region.textY}" text-anchor="middle">${region.label}</text>
-                      ${regionCounts[key] ? `<circle class="region-dot" cx="${region.textX + 38}" cy="${region.textY - 9}" r="10"></circle>` : ""}
-                    `)
+                <svg class="japan-map" viewBox="0 0 400 430" role="img" aria-label="にほんちず">
+                  ${mapTiles
+                    .map((tile) => {
+                      const count = regionCounts[tile.key] || 0;
+                      return `
+                      <g class="region-tile" role="button" tabindex="0" onclick="focusRegion('${tile.key}')" onkeydown="if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); focusRegion('${tile.key}'); }">
+                        <rect class="region-shape ${count ? "has-bugs" : ""} ${activeRegion === tile.key ? "is-active" : ""}" x="${tile.x}" y="${tile.y}" width="${tile.width}" height="${tile.height}" rx="10"></rect>
+                        <text class="region-label" x="${tile.x + tile.width / 2}" y="${tile.y + tile.height / 2}" text-anchor="middle" dominant-baseline="central">${tile.label}</text>
+                        ${count ? `
+                          <circle class="region-dot" cx="${tile.x + tile.width - 16}" cy="${tile.y + 16}" r="11"></circle>
+                          <text class="region-count" x="${tile.x + tile.width - 16}" y="${tile.y + 16}">${count}</text>
+                        ` : ""}
+                      </g>
+                    `;
+                    })
                     .join("")}
                 </svg>
                 ${
                   locationEntries.length
-                    ? locationEntries
-                        .map(([key, location]) => {
-                          const regionKey = ensureLocationRegion(key);
-                          const region = japanRegions[regionKey] || japanRegions.kanto;
-                          const bugs = locationBugs(key);
-                          return `
-                            <button class="pin-button ${activeKey === key ? "is-active" : ""}" type="button" style="left:${region.x}%; top:${region.y}%;" onclick="focusLocation('${key}')">
-                              <span class="pin-count">${bugs.length}</span>
-                              <span class="pin-label">
-                                <span>${escapeHtml(location.label)}</span>
-                                <small>${region.label}</small>
-                              </span>
-                            </button>
-                          `;
-                        })
-                        .join("")
-                    : `<div class="empty-state"><span>らべるを ついかすると ちずに でるよ</span></div>`
+                    ? ""
+                    : `<div class="empty-state"><span>ばしょを ついかすると ちずに でるよ</span></div>`
                 }
               </div>
               <div class="map-side">
                 <section class="section-band">
                   <div class="section-title">
+                    <span class="tool-icon" aria-hidden="true">${icon("map")}</span>
+                    <div>
+                      <h2>ちほう</h2>
+                    </div>
+                  </div>
+                  <div class="region-legend-grid">
+                    ${mapTiles
+                      .map((tile) => `
+                        <button class="region-legend-card ${activeRegion === tile.key ? "is-active" : ""}" type="button" onclick="focusRegion('${tile.key}')">
+                          <span>${tile.label}</span>
+                          <span class="region-badge">${regionCounts[tile.key] || 0}</span>
+                        </button>
+                      `)
+                      .join("")}
+                  </div>
+                </section>
+                <section class="section-band">
+                  <div class="section-title">
                     <span class="tool-icon" aria-hidden="true">${icon(activeLocation.icon)}</span>
                     <div>
                       <h2>${escapeHtml(activeLocation.label)}</h2>
-                      <p>${japanRegions[activeRegion]?.label || "ちいきなし"} / ${activeBugs.length}こ みつけたよ</p>
+                      <p>${escapeHtml(activeLocation.area || japanRegions[activeRegion]?.label || "しょざいちなし")} / ${activeBugs.length}こ みつけたよ</p>
                     </div>
                   </div>
                   ${
@@ -6500,6 +7043,33 @@
                     <span class="mini-icon" aria-hidden="true">${icon("book")}</span>
                     <span>この ばしょを ずかんで みる</span>
                   </button>
+                </section>
+                <section class="section-band">
+                  <div class="section-title">
+                    <span class="tool-icon" aria-hidden="true">${icon("pin")}</span>
+                    <div>
+                      <h2>ばしょ</h2>
+                    </div>
+                  </div>
+                  <div class="map-location-list">
+                    ${
+                      locationEntries.length
+                        ? locationEntries
+                            .map(([key, location]) => {
+                              const regionKey = ensureLocationRegion(key);
+                              const bugs = locationBugs(key);
+                              return `
+                                <button class="map-location-card ${activeKey === key ? "is-active" : ""}" type="button" onclick="focusLocation('${key}')">
+                                  <span>${escapeHtml(location.label)}</span>
+                                  <small>${escapeHtml(location.area || japanRegions[regionKey]?.label || "しょざいちなし")}</small>
+                                  <small>${bugs.length}こ</small>
+                                </button>
+                              `;
+                            })
+                            .join("")
+                        : `<div class="empty-state"><span>ばしょを ついかしてね</span></div>`
+                    }
+                  </div>
                 </section>
               </div>
             </section>
