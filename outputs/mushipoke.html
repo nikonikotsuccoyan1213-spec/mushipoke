@@ -26,6 +26,10 @@
         box-sizing: border-box;
       }
 
+      * {
+        min-width: 0;
+      }
+
       html,
       body {
         min-height: 100%;
@@ -81,6 +85,7 @@
         min-height: 100vh;
         margin: 0 auto;
         padding: 18px clamp(14px, 3vw, 28px) 96px;
+        overflow-x: clip;
       }
 
       body.is-cover .app-shell {
@@ -2243,6 +2248,7 @@
         grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
         gap: 16px;
         align-items: start;
+        min-width: 0;
       }
 
       .map-panel {
@@ -2271,6 +2277,7 @@
         width: min(100%, 560px);
         height: auto;
         max-height: 70vh;
+        overflow: visible;
       }
 
       .region-shape {
@@ -3143,11 +3150,13 @@
 
       @media (max-width: 640px) {
         .app-shell {
-          padding-inline: 10px;
+          width: 100%;
+          padding: 10px 8px 104px;
         }
 
         .section-band {
           padding: 14px 10px;
+          border-width: 2px;
         }
 
         .section-title {
@@ -3156,13 +3165,23 @@
         }
 
         .topbar {
-          grid-template-columns: 48px 1fr 48px;
-          padding: 8px;
+          grid-template-columns: 42px minmax(0, 1fr) 42px;
+          gap: 6px;
+          padding: 6px;
+          margin-bottom: 12px;
         }
 
         .icon-button {
-          width: 44px;
-          height: 44px;
+          width: 38px;
+          height: 38px;
+          border-width: 2px;
+        }
+
+        .brand {
+          font-size: clamp(1.6rem, 9vw, 2.4rem);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .mega-button {
@@ -3277,6 +3296,38 @@
           gap: 7px;
         }
 
+        .map-panel {
+          min-height: 0;
+          padding: 8px;
+          border-width: 2px;
+          box-shadow: 5px 6px 0 rgba(17, 17, 17, 0.12);
+        }
+
+        .japan-map {
+          width: 100%;
+          max-height: 58vh;
+        }
+
+        .region-label {
+          font-size: 12px;
+          stroke-width: 3px;
+        }
+
+        .region-shape {
+          stroke-width: 3;
+          filter: none;
+        }
+
+        .region-legend-grid,
+        .map-location-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .map-location-card {
+          min-height: 68px;
+          padding: 8px;
+        }
+
         .bugs-grid {
           grid-template-columns: 1fr;
         }
@@ -3328,8 +3379,10 @@
           right: max(6px, env(safe-area-inset-right));
           bottom: max(6px, env(safe-area-inset-bottom));
           left: max(6px, env(safe-area-inset-left));
-          gap: 5px;
-          padding: 5px;
+          gap: 4px;
+          padding: 4px;
+          border-width: 2px;
+          box-shadow: 4px 5px 0 rgba(17, 17, 17, 0.14);
         }
 
         .label-add-row {
@@ -3346,6 +3399,51 @@
           width: 54px;
           min-height: 54px;
           padding: 8px;
+        }
+      }
+
+      @media (max-width: 390px) {
+        .app-shell {
+          padding-inline: 6px;
+        }
+
+        .section-band {
+          padding: 12px 8px;
+        }
+
+        .tabbar {
+          right: max(4px, env(safe-area-inset-right));
+          left: max(4px, env(safe-area-inset-left));
+          gap: 3px;
+          padding: 3px;
+        }
+
+        .nav-button {
+          min-height: 42px;
+          padding: 2px;
+        }
+
+        .nav-button .mini-icon {
+          width: 25px;
+          height: 25px;
+        }
+
+        .nav-button .mini-icon svg {
+          width: 19px;
+          height: 19px;
+        }
+
+        .region-label {
+          font-size: 11px;
+        }
+
+        .region-dot {
+          transform: scale(0.9);
+          transform-origin: center;
+        }
+
+        .region-count {
+          font-size: 10px;
         }
       }
 
